@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 <title>ベース弦 最安値比較 | 今日一番安いベース弦が3秒でわかる</title>
-<meta name="description" content="ベース弦の最安値をリアルタイム比較。D'Addario、Ernie Ball、Elixirなど人気型番を最安ショップへ即誘導。">
+<meta name="description" content="ベース弦の最安値をリアルタイム比較。D'Addario、Ernie Ball、Elixirなど人気型番を各ショップへ直リンク。">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Noto+Sans+JP:wght@400;700;900&display=swap" rel="stylesheet">
 <style>
@@ -52,84 +52,52 @@
 
   /* PRODUCT CARD */
   .products { padding:0 12px 12px; display:flex; flex-direction:column; gap:10px; }
-  .product-card { background:var(--surface); border:1px solid var(--border); border-radius:8px; overflow:hidden; position:relative; transition:border-color .2s; animation:slideUp .4s ease both; cursor:pointer; }
+  .product-card { background:var(--surface); border:1px solid var(--border); border-radius:8px; overflow:hidden; position:relative; transition:border-color .2s; animation:slideUp .4s ease both; }
   .product-card:hover { border-color:var(--accent); }
   @keyframes slideUp { from{transform:translateY(20px);opacity:0} to{transform:translateY(0);opacity:1} }
-  .card-body { display:flex; gap:10px; padding:12px 12px 10px; }
-  .product-img { width:72px; height:72px; border-radius:6px; background:var(--surface2); flex-shrink:0; display:flex; align-items:center; justify-content:center; overflow:hidden; border:1px solid var(--border); }
-  .product-img svg { width:40px; height:40px; opacity:.5; }
-  .product-info { flex:1; min-width:0; }
-  .product-brand { font-size:10px; color:var(--muted); letter-spacing:1px; text-transform:uppercase; margin-bottom:1px; }
-  .product-name { font-family:'Bebas Neue',sans-serif; font-size:20px; letter-spacing:1px; line-height:1.1; color:var(--text); margin-bottom:4px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
-  .product-tags { display:flex; gap:4px; flex-wrap:wrap; margin-bottom:6px; }
+
+  /* カードヘッダー：ブランド＆型番を大きく */
+  .card-header { padding:16px 16px 10px; border-bottom:1px solid var(--border); }
+  .product-brand-large { font-size:11px; color:var(--accent); letter-spacing:3px; text-transform:uppercase; font-weight:700; margin-bottom:4px; }
+  .product-model-large { font-family:'Bebas Neue',sans-serif; font-size:30px; letter-spacing:2px; line-height:1; color:var(--text); }
+  .product-tags { display:flex; gap:4px; flex-wrap:wrap; margin-top:8px; }
   .tag { font-size:9px; padding:2px 5px; border-radius:2px; border:1px solid var(--border); color:var(--muted); }
   .tag-nickel { border-color:#4a9eff40; color:#4a9eff; }
   .tag-coated { border-color:#00e67640; color:var(--green); }
   .tag-5str { border-color:#ff6b3540; color:var(--accent2); }
-  .price-block { display:flex; align-items:flex-end; gap:6px; }
+
+  /* 最安値表示 */
+  .card-price-row { display:flex; align-items:center; justify-content:space-between; padding:10px 16px; border-bottom:1px solid var(--border); }
   .price-label { font-size:9px; color:var(--muted); margin-bottom:2px; }
-  .price-main { font-family:'Bebas Neue',sans-serif; font-size:32px; color:var(--accent); line-height:1; }
-  .price-diff { font-size:11px; font-weight:700; color:var(--green); background:#00e67610; border:1px solid #00e67630; padding:2px 6px; border-radius:3px; margin-bottom:3px; white-space:nowrap; }
+  .price-main { font-family:'Bebas Neue',sans-serif; font-size:36px; color:var(--accent); line-height:1; }
+  .price-diff { font-size:11px; font-weight:700; color:var(--green); background:#00e67610; border:1px solid #00e67630; padding:4px 8px; border-radius:3px; }
 
   /* METER */
-  .buy-meter { padding:0 12px 12px; }
+  .buy-meter { padding:10px 16px; border-bottom:1px solid var(--border); }
   .meter-label { font-size:10px; color:var(--muted); margin-bottom:6px; display:flex; justify-content:space-between; }
   .meter-track { height:6px; background:var(--surface2); border-radius:3px; overflow:hidden; margin-bottom:4px; }
   .meter-fill { height:100%; border-radius:3px; transition:width 1s ease; }
   .meter-status { font-size:11px; font-weight:700; }
   .status-good{color:var(--green)} .status-avg{color:var(--gold)} .status-high{color:var(--muted)}
 
-  /* SHOP COMPARE */
-  .shop-compare { display:flex; gap:6px; padding:0 12px 12px; }
-  .shop-btn { flex:1; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:8px 6px; border-radius:6px; border:1px solid var(--border); background:var(--surface2); cursor:pointer; transition:all .15s; }
-  .shop-btn:active{opacity:.8}
-  .shop-name { font-size:9px; color:var(--muted); margin-bottom:2px; font-weight:700; }
-  .shop-price { font-family:'Bebas Neue',sans-serif; font-size:16px; line-height:1; }
-  .shop-price.cheapest{color:var(--accent)} .shop-price.normal{color:var(--text)}
-  .shop-btn.best-shop { border-color:var(--accent); background:#ff2d5510; }
-
-  /* CTA */
-  .cta-btn { display:flex; align-items:center; justify-content:center; gap:8px; height:56px; background:linear-gradient(135deg,var(--accent),#ff4d6b); color:white; font-size:15px; font-weight:900; border:none; cursor:pointer; text-decoration:none; font-family:'Noto Sans JP',sans-serif; letter-spacing:.5px; transition:opacity .15s,transform .1s; margin:0 12px 12px; border-radius:6px; width:calc(100% - 24px); position:relative; overflow:hidden; }
-  .cta-btn::after { content:''; position:absolute; inset:0; background:linear-gradient(135deg,rgba(255,255,255,.1),transparent 60%); }
-  .cta-btn:active { transform:scale(.98); opacity:.9; }
+  /* 各ショップ直リンクボタン */
+  .shop-links { display:flex; flex-direction:column; gap:6px; padding:10px 12px 12px; }
+  .shop-link-btn { display:flex; align-items:center; justify-content:space-between; padding:12px 14px; border-radius:6px; border:1px solid var(--border); background:var(--surface2); text-decoration:none; cursor:pointer; transition:all .15s; }
+  .shop-link-btn:hover { border-color:var(--accent); background:#ff2d5508; }
+  .shop-link-btn.best { border-color:var(--accent); background:#ff2d5512; }
+  .shop-link-left { display:flex; align-items:center; gap:10px; }
+  .shop-icon-badge { width:30px; height:30px; border-radius:6px; display:flex; align-items:center; justify-content:center; font-size:15px; flex-shrink:0; }
+  .shop-icon-amazon { background:#ff9900; }
+  .shop-icon-rakuten { background:#bf0000; }
+  .shop-icon-sh { background:#1a4c9a; }
+  .shop-link-name { font-size:13px; font-weight:700; color:var(--text); }
+  .shop-link-note { font-size:10px; color:var(--muted); }
+  .shop-link-price { font-family:'Bebas Neue',sans-serif; font-size:22px; }
+  .shop-link-price.best-price { color:var(--accent); }
+  .shop-link-arrow { font-size:14px; color:var(--muted); margin-left:4px; }
 
   /* NOTICE */
   .price-notice { background:#ff2d5510; border:1px solid #ff2d5530; border-radius:4px; padding:8px 12px; margin:0 12px 12px; font-size:10px; color:#ff6b6b; display:flex; align-items:center; gap:6px; }
-
-  /* DETAIL MODAL */
-  .product-detail { display:none; position:fixed; inset:0; z-index:300; background:var(--bg); overflow-y:auto; }
-  .detail-header { background:var(--surface); border-bottom:1px solid var(--border); padding:14px 16px; display:flex; align-items:center; gap:12px; position:sticky; top:0; z-index:10; }
-  .back-btn { display:flex; align-items:center; gap:4px; color:var(--muted); font-size:13px; cursor:pointer; padding:4px 8px; border-radius:4px; border:1px solid var(--border); background:var(--bg); font-family:'Noto Sans JP',sans-serif; }
-  .detail-title { font-family:'Bebas Neue',sans-serif; font-size:18px; letter-spacing:1px; }
-  .detail-hero { background:var(--surface); padding:24px 16px; text-align:center; border-bottom:1px solid var(--border); }
-  .detail-img { width:100px; height:100px; background:var(--surface2); border-radius:10px; margin:0 auto 16px; display:flex; align-items:center; justify-content:center; border:1px solid var(--border); }
-  .detail-brand { font-size:11px; color:var(--muted); letter-spacing:2px; text-transform:uppercase; margin-bottom:4px; }
-  .detail-name { font-family:'Bebas Neue',sans-serif; font-size:32px; letter-spacing:2px; margin-bottom:12px; }
-  .detail-price-label { font-size:11px; color:var(--muted); margin-bottom:4px; }
-  .detail-price { font-family:'Bebas Neue',sans-serif; font-size:52px; color:var(--accent); line-height:1; margin-bottom:8px; }
-  .detail-diff { display:inline-flex; align-items:center; gap:4px; background:#00e67615; border:1px solid #00e67640; color:var(--green); font-size:13px; font-weight:700; padding:4px 10px; border-radius:4px; }
-  .detail-section { padding:16px; border-bottom:1px solid var(--border); }
-  .detail-section-title { font-family:'Bebas Neue',sans-serif; font-size:16px; letter-spacing:2px; color:var(--muted); margin-bottom:12px; }
-  .shop-list { display:flex; flex-direction:column; gap:8px; }
-  .shop-row { display:flex; align-items:center; justify-content:space-between; padding:12px; background:var(--surface); border-radius:6px; border:1px solid var(--border); text-decoration:none; cursor:pointer; transition:border-color .15s; }
-  .shop-row.cheapest-row { border-color:var(--accent); background:#ff2d5508; }
-  .shop-row-left { display:flex; align-items:center; gap:10px; }
-  .shop-icon { width:32px; height:32px; border-radius:6px; display:flex; align-items:center; justify-content:center; font-size:16px; }
-  .shop-icon-amazon{background:#ff9900} .shop-icon-rakuten{background:#bf0000} .shop-icon-sh{background:#1a4c9a}
-  .shop-row-name { font-size:13px; font-weight:700; }
-  .shop-row-note { font-size:10px; color:var(--muted); }
-  .shop-row-price { font-family:'Bebas Neue',sans-serif; font-size:22px; }
-  .shop-row-price.cheapest{color:var(--accent)}
-  .ph-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:6px; }
-  .ph-item { background:var(--surface2); border-radius:6px; padding:8px; text-align:center; border:1px solid var(--border); }
-  .ph-item-label { font-size:9px; color:var(--muted); margin-bottom:4px; }
-  .ph-item-price { font-family:'Bebas Neue',sans-serif; font-size:18px; line-height:1; }
-  .ph-item-price.lowest{color:var(--green)} .ph-item-price.current{color:var(--accent)} .ph-item-price.avg{color:var(--text)}
-  .judge-card { background:var(--surface2); border-radius:8px; padding:16px; border:1px solid var(--border); text-align:center; }
-  .judge-icon { font-size:40px; margin-bottom:8px; }
-  .judge-label { font-family:'Bebas Neue',sans-serif; font-size:28px; letter-spacing:2px; margin-bottom:6px; }
-  .judge-desc { font-size:12px; color:var(--muted); line-height:1.6; }
-  .judge-good .judge-label{color:var(--green)} .judge-avg .judge-label{color:var(--gold)} .judge-high .judge-label{color:var(--muted)}
 
   /* BOTTOM */
   .bottom-info { padding:16px; font-size:10px; color:var(--muted); line-height:1.8; text-align:center; border-top:1px solid var(--border); }
@@ -150,9 +118,8 @@
   <div class="hero-sub">Amazon・楽天・サウンドハウスを毎日比較</div>
 </div>
 
-<div class="nav-tabs">
-  <div class="tab active" onclick="filterProducts('4str',this)">4弦</div>
-  <div class="tab" onclick="filterProducts('5str',this)">5弦</div>
+<div class="nav-tabs" id="brandTabs">
+  <div class="tab active" onclick="filterBrand('all',this)">すべて</div>
 </div>
 
 <div class="section-header">
@@ -177,64 +144,6 @@
   <a href="#" style="color:var(--muted)">運営者情報</a> | <a href="#" style="color:var(--muted)">プライバシーポリシー</a>
 </div>
 
-<!-- 詳細モーダル -->
-<div class="product-detail" id="detailPanel">
-  <div class="detail-header">
-    <button class="back-btn" onclick="closeDetail()">← 戻る</button>
-    <div class="detail-title" id="detailTitle"></div>
-  </div>
-  <div class="detail-hero">
-    <div class="detail-img">
-      <svg viewBox="0 0 40 40" width="60" height="60" fill="none">
-        <rect x="4" y="6" width="32" height="4" rx="2" fill="#ff2d55" opacity=".7"/>
-        <rect x="4" y="13" width="32" height="3" rx="1.5" fill="#888"/>
-        <rect x="4" y="19" width="32" height="3" rx="1.5" fill="#888"/>
-        <rect x="4" y="25" width="32" height="3" rx="1.5" fill="#888"/>
-        <rect x="4" y="31" width="32" height="3" rx="1.5" fill="#888"/>
-      </svg>
-    </div>
-    <div class="detail-brand" id="detailBrand"></div>
-    <div class="detail-name" id="detailName"></div>
-    <div class="detail-price-label">今日の最安値</div>
-    <div class="detail-price" id="detailPrice"></div>
-    <div class="detail-diff" id="detailDiff"></div>
-  </div>
-  <div style="padding:12px 16px;">
-    <a id="detailCtaTop" href="#" class="cta-btn" style="margin:0;width:100%;height:64px;font-size:17px;">
-      🔥 最安ショップで今すぐ購入する →
-    </a>
-  </div>
-  <div class="detail-section">
-    <div class="detail-section-title">📊 ショップ別価格比較</div>
-    <div class="shop-list" id="detailShopList"></div>
-  </div>
-  <div class="detail-section">
-    <div class="detail-section-title">📈 価格状況</div>
-    <div class="ph-grid">
-      <div class="ph-item"><div class="ph-item-label">30日最安値</div><div class="ph-item-price lowest" id="d30low"></div></div>
-      <div class="ph-item"><div class="ph-item-label">現在価格</div><div class="ph-item-price current" id="d30now"></div></div>
-      <div class="ph-item"><div class="ph-item-label">30日平均</div><div class="ph-item-price avg" id="d30avg"></div></div>
-    </div>
-  </div>
-  <div class="detail-section">
-    <div class="detail-section-title">🎯 今は買いか？</div>
-    <div class="judge-card" id="judgeCard">
-      <div class="judge-icon" id="judgeIcon"></div>
-      <div class="judge-label" id="judgeLabel"></div>
-      <div class="judge-desc" id="judgeDesc"></div>
-    </div>
-  </div>
-  <div style="padding:16px;">
-    <a id="detailCtaBottom" href="#" class="cta-btn" style="margin:0;width:100%;height:60px;">
-      🔥 最安ショップで購入する →
-    </a>
-  </div>
-  <div class="bottom-info">
-    ※ 価格は変動します。リンク先で最終価格をご確認ください。<br>
-    当サイトはアフィリエイトプログラムに参加しています。
-  </div>
-</div>
-
 <script>
 // ============================================================
 // ▼▼▼ ここだけ書き換えてください ▼▼▼
@@ -243,35 +152,24 @@ const GAS_URL = 'https://script.google.com/macros/s/AKfycbw9AP4GaFVIsH1zwwiYqT74
 // ============================================================
 
 let allProducts   = [];
-let currentFilter = '4str';
+let currentBrand  = 'all';
 
 /* ---------- ユーティリティ ---------- */
 const fmtPrice = n => (!n || isNaN(n)) ? '—' : '¥' + Number(n).toLocaleString();
 
 const shopMeta = name => {
-  if (name.includes('Amazon')) return { icon:'🛒', cls:'shop-icon-amazon' };
-  if (name.includes('楽天'))   return { icon:'🦅', cls:'shop-icon-rakuten' };
-  return { icon:'🎸', cls:'shop-icon-sh' };
+  if (name.includes('Amazon')) return { icon:'🛒', cls:'shop-icon-amazon', label:'Amazon' };
+  if (name.includes('楽天'))   return { icon:'🦅', cls:'shop-icon-rakuten', label:'楽天市場' };
+  return { icon:'🎸', cls:'shop-icon-sh', label:'サウンドハウス' };
 };
-
-const STRING_SVG = `<svg viewBox="0 0 40 40" fill="none">
-  <rect x="4" y="6" width="32" height="4" rx="2" fill="#ff2d55" opacity=".7"/>
-  <rect x="4" y="13" width="32" height="3" rx="1.5" fill="#888"/>
-  <rect x="4" y="19" width="32" height="3" rx="1.5" fill="#888"/>
-  <rect x="4" y="25" width="32" height="3" rx="1.5" fill="#888"/>
-  <rect x="4" y="31" width="32" height="3" rx="1.5" fill="#888"/>
-</svg>`;
 
 /* ---------- 買い判定 ---------- */
 function calcJudge(now, low30, avg30) {
-  if (!low30 || !avg30) return { cls:'judge-avg', icon:'⚖️', label:'○ 参考価格', desc:'価格履歴データが不足しています。' };
+  if (!low30 || !avg30) return { cls:'judge-avg', icon:'⚖️', label:'○ 参考価格' };
   const ratio = (now - low30) / ((avg30 - low30) || 1);
-  if (ratio <= 0.3) return { cls:'judge-good', icon:'🔥', label:'◎ 今が狙い目！',
-    desc:`過去30日最安値に近い水準です。平均より${fmtPrice(avg30-now)}お得です。今が買いタイミングです。` };
-  if (ratio <= 0.7) return { cls:'judge-avg', icon:'⚖️', label:'○ 平均水準',
-    desc:`30日間の平均的な価格帯です。急ぎでなければもう少し待つ手もあります。` };
-  return { cls:'judge-high', icon:'⏳', label:'△ やや高め',
-    desc:`過去30日最安より${fmtPrice(now-low30)}ほど高い水準です。もう少し待つのがおすすめです。` };
+  if (ratio <= 0.3) return { cls:'judge-good', icon:'🔥', label:'◎ 今が狙い目！' };
+  if (ratio <= 0.7) return { cls:'judge-avg', icon:'⚖️', label:'○ 平均水準' };
+  return { cls:'judge-high', icon:'⏳', label:'△ やや高め' };
 }
 
 function meterPct(now, low30, avg30) {
@@ -299,33 +197,40 @@ function buildCard(p, idx) {
   const diffAmt  = Math.round(avg30 - cheapest);
   const statusCls= judge.cls === 'judge-good' ? 'status-good' : judge.cls === 'judge-high' ? 'status-high' : 'status-avg';
 
-  const shopBtns = shops.slice(0,3).map((s,i) => `
-    <div class="shop-btn${i===0?' best-shop':''}">
-      <div class="shop-name">${shopMeta(s.name).icon} ${s.name.replace('サウンドハウス','SH')}</div>
-      <div class="shop-price ${i===0?'cheapest':'normal'}">${fmtPrice(s.price)}</div>
-    </div>`).join('');
+  const shopLinksHtml = shops.map((s, i) => {
+    const meta = shopMeta(s.name);
+    return `<a href="${s.url || '#'}" class="shop-link-btn ${i===0?'best':''}" onclick="event.stopPropagation()" target="_blank" rel="noopener">
+      <div class="shop-link-left">
+        <div class="shop-icon-badge ${meta.cls}">${meta.icon}</div>
+        <div>
+          <div class="shop-link-name">${meta.label}</div>
+          <div class="shop-link-note">${i===0?'✅ 最安値':'通常価格'}</div>
+        </div>
+      </div>
+      <div style="display:flex;align-items:center;gap:4px;">
+        <div class="shop-link-price ${i===0?'best-price':''}">${fmtPrice(s.price)}</div>
+        <div class="shop-link-arrow">→</div>
+      </div>
+    </a>`;
+  }).join('');
 
   const tagHtml = (p.tags||'').split(',').map(t=>t.trim()).filter(Boolean).map(t => {
     const cls = t==='コーティング'?'tag-coated':t==='ニッケル'?'tag-nickel':t==='5弦'?'tag-5str':'';
     return `<span class="tag ${cls}">${t}</span>`;
   }).join('');
 
-  return `<div class="product-card" data-tags="${p.string_type}" data-id="${p.id}"
-      style="animation-delay:${idx*.08}s" onclick="openDetail('${p.id}')">
-    <div class="card-body">
-      <div class="product-img">${STRING_SVG}</div>
-      <div class="product-info">
-        <div class="product-brand">${p.brand}</div>
-        <div class="product-name">${p.model}</div>
-        <div class="product-tags">${tagHtml}</div>
-        <div class="price-block">
-          <div>
-            <div class="price-label">今日の最安</div>
-            <div class="price-main">${fmtPrice(cheapest)}</div>
-          </div>
-          ${diffAmt > 0 ? `<div class="price-diff">▼${diffAmt.toLocaleString()}円お得</div>` : ''}
-        </div>
+  return `<div class="product-card" data-brand="${(p.brand||'').toLowerCase()}" style="animation-delay:${idx*.08}s">
+    <div class="card-header">
+      <div class="product-brand-large">${p.brand}</div>
+      <div class="product-model-large">${p.model}</div>
+      <div class="product-tags">${tagHtml}</div>
+    </div>
+    <div class="card-price-row">
+      <div>
+        <div class="price-label">今日の最安値</div>
+        <div class="price-main">${fmtPrice(cheapest)}</div>
       </div>
+      ${diffAmt > 0 ? `<div class="price-diff">▼ ${diffAmt.toLocaleString()}円お得</div>` : ''}
     </div>
     <div class="buy-meter">
       <div class="meter-label">
@@ -337,18 +242,29 @@ function buildCard(p, idx) {
       </div>
       <div class="meter-status ${statusCls}">${judge.icon} ${judge.label}</div>
     </div>
-    <div class="shop-compare">${shopBtns}</div>
-    <a href="${shops[0]?.url||'#'}" class="cta-btn" onclick="event.stopPropagation()">
-      <span>🔥 最安ショップで購入する</span>
-      <span style="font-size:18px">→</span>
-    </a>
+    <div class="shop-links">${shopLinksHtml}</div>
   </div>`;
 }
 
+/* ---------- ブランドタブ生成 ---------- */
+function buildBrandTabs(products) {
+  const brands = [...new Set(products.map(p => p.brand).filter(Boolean))];
+  const tabsEl = document.getElementById('brandTabs');
+  brands.forEach(brand => {
+    const tab = document.createElement('div');
+    tab.className = 'tab';
+    tab.textContent = brand;
+    tab.onclick = function() { filterBrand(brand.toLowerCase(), this); };
+    tabsEl.appendChild(tab);
+  });
+}
+
 /* ---------- 一覧描画 ---------- */
-function renderList(filter) {
-  const list     = document.getElementById('productList');
-  const filtered = allProducts.filter(p => (p.string_type||'').includes(filter));
+function renderList(brand) {
+  const list = document.getElementById('productList');
+  const filtered = brand === 'all'
+    ? allProducts
+    : allProducts.filter(p => (p.brand||'').toLowerCase() === brand);
   if (!filtered.length) {
     list.innerHTML = `<div class="error-wrap"><div class="error-icon">📭</div>
       <div class="error-text">この条件の商品がまだありません</div></div>`;
@@ -358,70 +274,11 @@ function renderList(filter) {
 }
 
 /* ---------- フィルター ---------- */
-function filterProducts(tag, el) {
-  currentFilter = tag;
+function filterBrand(brand, el) {
+  currentBrand = brand;
   document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
   el.classList.add('active');
-  renderList(tag);
-}
-
-/* ---------- 詳細モーダル ---------- */
-function openDetail(id) {
-  const p = allProducts.find(x => x.id === id);
-  if (!p) return;
-
-  const shops = [
-    { name:'Amazon',        price:Number(p.amazon_price),     url:p.amazon_url },
-    { name:'楽天市場',      price:Number(p.rakuten_price),    url:p.rakuten_url },
-    { name:'サウンドハウス',price:Number(p.soundhouse_price), url:p.soundhouse_url },
-  ].filter(s=>s.price>0).sort((a,b)=>a.price-b.price);
-
-  const cheapest = shops[0]?.price || 0;
-  const low30    = Number(p.low30) || 0;
-  const avg30    = Number(p.avg30) || cheapest;
-  const judge    = calcJudge(cheapest, low30, avg30);
-  const diffAmt  = Math.round(avg30 - cheapest);
-
-  document.getElementById('detailTitle').textContent  = p.model;
-  document.getElementById('detailBrand').textContent  = p.brand.toUpperCase();
-  document.getElementById('detailName').textContent   = p.model;
-  document.getElementById('detailPrice').textContent  = fmtPrice(cheapest);
-  document.getElementById('detailDiff').textContent   = diffAmt > 0
-    ? `▼ 30日平均より${diffAmt.toLocaleString()}円お得` : '30日平均水準';
-  document.getElementById('d30low').textContent = fmtPrice(low30);
-  document.getElementById('d30now').textContent = fmtPrice(cheapest);
-  document.getElementById('d30avg').textContent = fmtPrice(avg30);
-
-  const jc = document.getElementById('judgeCard');
-  jc.className = 'judge-card ' + judge.cls;
-  document.getElementById('judgeIcon').textContent  = judge.icon;
-  document.getElementById('judgeLabel').textContent = judge.label;
-  document.getElementById('judgeDesc').textContent  = judge.desc;
-
-  document.getElementById('detailShopList').innerHTML = shops.map((s,i) => {
-    const meta = shopMeta(s.name);
-    return `<a href="${s.url||'#'}" class="shop-row ${i===0?'cheapest-row':''}">
-      <div class="shop-row-left">
-        <div class="shop-icon ${meta.cls}">${meta.icon}</div>
-        <div>
-          <div class="shop-row-name">${s.name}</div>
-          <div class="shop-row-note">${i===0?'✅ 今日の最安':'通常価格'}</div>
-        </div>
-      </div>
-      <div class="shop-row-price ${i===0?'cheapest':''}">${fmtPrice(s.price)}</div>
-    </a>`;
-  }).join('');
-
-  const url = shops[0]?.url || '#';
-  document.getElementById('detailCtaTop').href    = url;
-  document.getElementById('detailCtaBottom').href = url;
-  document.getElementById('detailPanel').style.display = 'block';
-  document.body.style.overflow = 'hidden';
-}
-
-function closeDetail() {
-  document.getElementById('detailPanel').style.display = 'none';
-  document.body.style.overflow = '';
+  renderList(brand);
 }
 
 /* ---------- 起動：GASからデータ取得 ---------- */
@@ -453,12 +310,14 @@ function closeDetail() {
   }
 
   allProducts = data.products;
+  buildBrandTabs(allProducts);
+
   const ts = data.updated_at
     ? new Date(data.updated_at).toLocaleDateString('ja-JP',{month:'numeric',day:'numeric',hour:'2-digit',minute:'2-digit'})
     : '更新済';
   badge.textContent   = '🔴 LIVE更新中';
   updatedAt.textContent = ts + ' 更新';
-  renderList(currentFilter);
+  renderList(currentBrand);
 })();
 </script>
 </body>
