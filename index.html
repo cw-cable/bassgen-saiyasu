@@ -96,6 +96,16 @@
   .shop-link-price.best-price { color:var(--accent); }
   .shop-link-arrow { font-size:14px; color:var(--muted); margin-left:4px; }
 
+  /* SEARCH BOX */
+  .search-wrap { padding:10px 12px; background:var(--surface); border-bottom:1px solid var(--border); }
+  .search-box { display:flex; align-items:center; gap:8px; background:var(--bg); border:1px solid var(--border); border-radius:6px; padding:8px 12px; transition:border-color .15s; }
+  .search-box:focus-within { border-color:var(--accent); }
+  .search-icon { color:var(--muted); font-size:14px; flex-shrink:0; }
+  .search-input { flex:1; background:none; border:none; outline:none; color:var(--text); font-size:14px; font-family:'Noto Sans JP',sans-serif; }
+  .search-input::placeholder { color:var(--muted); }
+  .search-clear { color:var(--muted); font-size:16px; cursor:pointer; flex-shrink:0; display:none; }
+  .search-clear.visible { display:block; }
+
   /* NOTICE */
   .price-notice { background:#ff2d5510; border:1px solid #ff2d5530; border-radius:4px; padding:8px 12px; margin:0 12px 12px; font-size:10px; color:#ff6b6b; display:flex; align-items:center; gap:6px; }
 
@@ -120,6 +130,14 @@
 
 <div class="nav-tabs" id="brandTabs">
   <div class="tab active" onclick="filterBrand('all',this)">すべて</div>
+</div>
+
+<div class="search-wrap">
+  <div class="search-box">
+    <span class="search-icon">🔍</span>
+    <input class="search-input" id="searchInput" type="text" placeholder="型番で検索　例：EXL170, 2814" oninput="onSearch(this.value)">
+    <span class="search-clear" id="searchClear" onclick="clearSearch()">✕</span>
+  </div>
 </div>
 
 <div class="section-header">
@@ -262,15 +280,35 @@ function buildBrandTabs(products) {
 /* ---------- 一覧描画 ---------- */
 function renderList(brand) {
   const list = document.getElementById('productList');
-  const filtered = brand === 'all'
+  let filtered = brand === 'all'
     ? allProducts
     : allProducts.filter(p => (p.brand||'').toLowerCase() === brand);
+
+  if (currentSearch) {
+    const q = currentSearch.toLowerCase();
+    filtered = filtered.filter(p => (p.model||'').toLowerCase().includes(q));
+  }
+
   if (!filtered.length) {
     list.innerHTML = `<div class="error-wrap"><div class="error-icon">📭</div>
-      <div class="error-text">この条件の商品がまだありません</div></div>`;
+      <div class="error-text">${currentSearch ? `「${currentSearch}」に一致する商品が見つかりませんでした` : 'この条件の商品がまだありません'}</div></div>`;
     return;
   }
   list.innerHTML = filtered.map((p,i) => buildCard(p,i)).join('');
+}
+
+/* ---------- 検索 ---------- */
+let currentSearch = '';
+
+function onSearch(val) {
+  currentSearch = val.trim();
+  document.getElementById('searchClear').classList.toggle('visible', currentSearch.length > 0);
+  renderList(currentBrand);
+}
+
+function clearSearch() {
+  document.getElementById('searchInput').value = '';
+  onSearch('');
 }
 
 /* ---------- フィルター ---------- */
